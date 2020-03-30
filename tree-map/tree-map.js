@@ -33,9 +33,19 @@ var Tree = function(value) {
   this.children = [];
 };
 
-Tree.prototype.addNode = function(value) {
+Tree.prototype.addChild = function(value) {
   let newNode = new Tree(value);
   this.children.push(newNode);
   return newNode;
 };
 
+Tree.prototype.map = function(func, tNode) {
+  let node = this;
+  let targetNode = tNode || new Tree(func(node.value));
+  let newTree = targetNode;
+    for (let i = 0; i < node.children.length; i++) {
+      targetNode.addChild(func(node.children[i].value));
+      node.children[i].map(func,targetNode);
+    }
+  return newTree;
+};
