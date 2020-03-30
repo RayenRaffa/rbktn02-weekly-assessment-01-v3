@@ -33,5 +33,9 @@ var Tree = function(value) {
   this.children = [];
 };
 
-
+Tree.prototype.addNode = function(value) {
+  let newNode = new Tree(value);
+  this.children.push(newNode);
+  return newNode;
+};
 
